@@ -8,10 +8,18 @@ export const EXCEPTIONS = {
 
 export const extentionStorage = {
     clearDomExp: async function() {
-        await chrome.storage.local.clear();
+        return new Promise((resolve) => {
+            chrome.storage.local.remove('exceptionName', () => {
+                resolve();
+            });
+        });
     },
     setDomExp: function(domExpName) {
-        chrome.storage.local.set({ exceptionName: domExpName });
+        return new Promise((resolve) => {
+            chrome.storage.local.set({ exceptionName: domExpName }, () => {
+                resolve();
+            })
+        });
     },
     onChangedDomExp: function(callback) {
         chrome.storage.onChanged.addListener((changes) => {
@@ -20,6 +28,23 @@ export const extentionStorage = {
         });
     },
     getAvailability: function() {
-        return chrome.storage.local.get('webauthnAvailabilty');
+        return new Promise((resolve) => {
+            chrome.storage.local.get('availabilityStatus', (result) => {
+                resolve(result.availabilityStatus);
+            });
+        });
+    },
+    setAvailability: function(availabilityStatus) {
+        return new Promise((resolve) => {
+            chrome.storage.local.set({ availabilityStatus: availabilityStatus }, () => {
+                resolve();
+            });
+        })
+    },
+    onChangedAvailability: function(callback) {
+        chrome.storage.onChanged.addListener((changes) => {
+            if (!changes.availabilityStatus) return;
+            callback(changes.availabilityStatus.newValue)
+        });
     }
 }
