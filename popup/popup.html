@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>WebAuthnInjector Popup Page</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h2>WebAuthn Injector</h2>
+
+  <div class="tab-buttons">
+    <button class="tab-button active" data-tab="inject-error">Inject Error</button>
+    <button class="tab-button" data-tab="edit-availability">Edit Availability</button>
+  </div>
+
+  <!-- Inject Error Tab Content -->
+  <div class="tab-content active" id="inject-error">
+    <div class="button-container">
+      <button id="notAllowedError">NotAllowedError</button>
+      <button id="invalidStateError">InvalidStateError</button>
+      <button id="notSupportedError">NotSupportedError</button>
+      <button id="abortError">AbortError</button>
+      <button id="unknownError">UnknownError</button>
+    </div>
+  </div>
+
+  <!-- Edit Availability Tab Content -->
+  <div class="tab-content" id="edit-availability">
+    <div class="toggle-container">
+      <label>
+        Support PublicKeyCredential
+        <input type="checkbox" id="supportPublicKeyCredential">
+      </label>
+      <label>
+        Support isConditionalMediationAvailable
+        <input type="checkbox" id="supportConditionalMediation">
+      </label>
+      <label>
+        Support isUVPAA
+        <input type="checkbox" id="supportUVPAA">
+      </label>
+      <label>
+        Support getClientCapabilities
+        <input type="checkbox" id="supportClientCapabilities">
+      </label>
+
+      <!-- Conditional Capabilities Section -->
+      <div id="client-capabilities-section" style="display: none; margin-top: 10px;">
+        <label>
+          Support conditionalCreate
+          <input type="checkbox" id="supportConditionalCreate">
+        </label>
+        <label>
+          Support conditionalGet
+          <input type="checkbox" id="supportConditionalGet">
+        </label>
+        <label>
+          Support hybridTransport
+          <input type="checkbox" id="supportHybridTransport">
+        </label>
+        <label>
+          Support passkeyPlatformAuthenticator
+          <input type="checkbox" id="supportPasskeyPlatformAuthenticator">
+        </label>
+        <label>
+          Support relatedOrigins
+          <input type="checkbox" id="supportRelatedOrigins">
+        </label>
+        <label>
+          Support signalAllAcceptedCredentials
+          <input type="checkbox" id="supportSignalAllAcceptedCredentials">
+        </label>
+        <label>
+          Support signalCurrentUserDetails
+          <input type="checkbox" id="supportSignalCurrentUserDetails">
+        </label>
+        <label>
+          Support signalUnknownCredential
+          <input type="checkbox" id="supportSignalUnknownCredential">
+        </label>
+        <label>
+          Support userVerifyingPlatformAuthenticator
+          <input type="checkbox" id="supportUserVerifyingPlatformAuthenticator">
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <script src="view.js"></script>
+  <script src="handler.js" type="module"></script>
+</body>
+</html>

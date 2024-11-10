@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "WebAuthnInjector",
+  "version": "1.0",
+  "permissions": ["activeTab", "storage"],
+  "action": {
+    "default_popup": "popup/popup.html"
+  },
+  "content_scripts": [
+
+    {
+      "matches": ["<all_urls>"],
+      "js": ["contents/contentLoader.js"],
+      "type": "module",
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+      {
+          "resources": [
+              "contents/content.js",
+              "contents/injectedWebAuthn.js",
+              "module/storage.js"
+          ],
+          "matches": ["<all_urls>"]
+      }
+  ]
+}
