@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "WebAuthnInjector",
-  "version": "0.1",
+  "version": "1.0.0",
   "description": "閲覧中のページのJavaScriptコードを上書きし、強制的にエラーを発生させることができます。",
   "permissions": ["activeTab", "storage"],
   "action": {
