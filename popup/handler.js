@@ -18,6 +18,10 @@ document.getElementById('abortError').addEventListener('click', () => {
     let expName = EXCEPTIONS.AbortError.name;
     extentionStorage.setDomExp(expName);
 });
+document.getElementById('timeoutError').addEventListener('click', () => {
+    let expName = EXCEPTIONS.TimeoutError.name;
+    extentionStorage.setDomExp(expName);
+});
 document.getElementById('unknownError').addEventListener('click', () => {
     let expName = EXCEPTIONS.UnknownError.name;
     extentionStorage.setDomExp(expName);

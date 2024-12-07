@@ -3,6 +3,7 @@ export const EXCEPTIONS = {
     InvalidStateError: new DOMException('The user attempted to register an authenticator that contains one of the credentials already registered with the relying party.', 'InvalidStateError'),
     NotSupportedError: new DOMException('The operation options is not supported by this device.', 'NotSupportedError'),
     AbortError: new DOMException('The operation is Aborted.', 'AbortError'),
+    TimeoutError: new DOMException('The operation timed out.', 'TimeoutError'),
     UnknownError: new DOMException('The operation is failed for an unknown transient reason.', 'UnknownError'),
 }
 
