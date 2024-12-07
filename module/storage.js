@@ -1,10 +1,10 @@
 export const EXCEPTIONS = {
-    NotAllowedError: new DOMException('The operation either timed out or was not allowed.', 'NotAllowedError'),
-    InvalidStateError: new DOMException('The user attempted to register an authenticator that contains one of the credentials already registered with the relying party.', 'InvalidStateError'),
-    NotSupportedError: new DOMException('The operation options is not supported by this device.', 'NotSupportedError'),
-    AbortError: new DOMException('The operation is Aborted.', 'AbortError'),
-    TimeoutError: new DOMException('The operation timed out.', 'TimeoutError'),
-    UnknownError: new DOMException('The operation is failed for an unknown transient reason.', 'UnknownError'),
+    NotAllowedError: new DOMException('This error was caused by a Chrome extension for debugging.', 'NotAllowedError'),
+    InvalidStateError: new DOMException('This error was caused by a Chrome extension for debugging.', 'InvalidStateError'),
+    NotSupportedError: new DOMException('This error was caused by a Chrome extension for debugging.', 'NotSupportedError'),
+    AbortError: new DOMException('This error was caused by a Chrome extension for debugging.', 'AbortError'),
+    TimeoutError: new DOMException('This error was caused by a Chrome extension for debugging.', 'TimeoutError'),
+    UnknownError: new DOMException('This error was caused by a Chrome extension for debugging.', 'UnknownError'),
 }
 
 export const extentionStorage = {
