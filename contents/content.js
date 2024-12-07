@@ -34,8 +34,14 @@ async function injectPublicKeyScript() {
 (async function init() {
     injectPublicKeyScript();
     await injectWebAuthnScript();
-    await extentionStorage.clearDomExp();
-    extentionStorage.onChangedDomExp((domName) => {
+    // send at first
+    extentionStorage.getDomExpName().then((domName) => {
+        if (!domName) return;
+        const domExp = EXCEPTIONS[domName];
+        window.postMessage({from:'contentScript', domExp}, '*');
+    });
+    // send onchanged
+    extentionStorage.onChangedDomExpName((domName) => {
         const domExp = EXCEPTIONS[domName];
         window.postMessage({from:'contentScript', domExp}, '*');
     });

@@ -8,21 +8,28 @@ export const EXCEPTIONS = {
 }
 
 export const extentionStorage = {
-    clearDomExp: async function() {
+    clearDomExpName: async function() {
         return new Promise((resolve) => {
             chrome.storage.local.remove('exceptionName', () => {
                 resolve();
             });
         });
     },
-    setDomExp: function(domExpName) {
+    setDomExpName: function(domExpName) {
         return new Promise((resolve) => {
             chrome.storage.local.set({ exceptionName: domExpName }, () => {
                 resolve();
-            })
+            });
         });
     },
-    onChangedDomExp: function(callback) {
+    getDomExpName: function() {
+        return new Promise((resolve) => {
+            chrome.storage.local.get('exceptionName', (result) => {
+                resolve(result.exceptionName);
+            });
+        });
+    },
+    onChangedDomExpName: function(callback) {
         chrome.storage.onChanged.addListener((changes) => {
             if (!changes.exceptionName) return;
             callback(changes.exceptionName.newValue)

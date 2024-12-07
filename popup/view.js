@@ -11,6 +11,22 @@ document.querySelectorAll('.tab-button').forEach(tabButton => {
   });
 });
 
+// Inject Error tab
+(()=> {
+  const checkboxes = document.querySelectorAll('#inject-error .button-container input[type="checkbox"]');
+
+  checkboxes.forEach(checkbox => {
+    checkbox.addEventListener('change', () => {
+      if (!checkbox.checked) return;
+      // unchecked others
+      checkboxes.forEach(cb => {
+        if (cb == checkbox) return;
+        cb.checked = false;
+      });
+    });
+  });
+})();
+
 // Initialize availability tab
 (async () => {
   const availabilityStatus = await extentionStorage.getAvailability();
