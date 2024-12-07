@@ -1,4 +1,6 @@
 (function() {
+    const originalCredCreate = navigator.credentials.create;
+    const originalCredGet = navigator.credentials.get;
     window.addEventListener('message', (event) => {
         if (event.source !== window || event.data.from !== 'contentScript') return;
         if (event.data.domExp) {
@@ -12,6 +14,9 @@
                 throw domExp;
             };
             return;
+        } else {
+            navigator.credentials.get = originalCredGet;
+            navigator.credentials.create = originalCredCreate;
         }
     });
 })();

@@ -61,7 +61,8 @@ h2 {
   width: 80%;
 }
 
-button {
+.button-container label {
+  display: inline-block;
   background-color: #4a4a8c;
   color: #fff;
   border: none;
@@ -71,16 +72,22 @@ button {
   max-width: 240px;
   border-radius: 5px;
   font-size: 14px;
+  text-align: center;
   cursor: pointer;
   transition: background-color 0.3s;
 }
 
-button:hover {
+.button-container label:hover {
   background-color: #3a3a6c;
 }
 
-button:active {
-  background-color: #2a2a5c;
+.button-container input[type="checkbox"] {
+  display: none;
+}
+
+.button-container label:has(input[type="checkbox"]:checked) {
+  background-color: #333;
+  color: #fff;
 }
 
 label {

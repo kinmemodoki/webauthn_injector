@@ -2,26 +2,42 @@ import { EXCEPTIONS, extentionStorage } from "../module/storage.js";
 import { AvailabilityStatus } from "../module/availabilityStatus.js";
 
 // Inject Error
-document.getElementById('notAllowedError').addEventListener('click', () => {
-    let expName = EXCEPTIONS.NotAllowedError.name;
-    extentionStorage.setDomExp(expName);
-});
-document.getElementById('invalidStateError').addEventListener('click', () => {
-    let expName = EXCEPTIONS.InvalidStateError.name;
-    extentionStorage.setDomExp(expName);
-});
-document.getElementById('notSupportedError').addEventListener('click', () => {
-    let expName = EXCEPTIONS.NotSupportedError.name;
-    extentionStorage.setDomExp(expName);
-});
-document.getElementById('abortError').addEventListener('click', () => {
-    let expName = EXCEPTIONS.AbortError.name;
-    extentionStorage.setDomExp(expName);
-});
-document.getElementById('unknownError').addEventListener('click', () => {
-    let expName = EXCEPTIONS.UnknownError.name;
-    extentionStorage.setDomExp(expName);
-});
+(async () => {
+    const exceptionTable = new Map([
+        // exceptionName: dom
+        [EXCEPTIONS.NotAllowedError.name, document.getElementById('notAllowedError')],
+        [EXCEPTIONS.InvalidStateError.name, document.getElementById('invalidStateError')],
+        [EXCEPTIONS.NotSupportedError.name, document.getElementById('notSupportedError')],
+        [EXCEPTIONS.AbortError.name, document.getElementById('abortError')],
+        [EXCEPTIONS.TimeoutError.name, document.getElementById('timeoutError')],
+        [EXCEPTIONS.UnknownError.name, document.getElementById('unknownError')]
+    ]);
+
+    // initialize
+    extentionStorage.getDomExpName().then((currentDomExpName) => {
+        if (!currentDomExpName) return;
+        const currentEnableDom = exceptionTable.get(currentDomExpName);
+        currentEnableDom.checked = true;
+    });
+
+    // set onchanged
+    const enableErrorInjection = document.getElementById("enableErrorInjection");
+    enableErrorInjection.addEventListener("change", (ev) => {
+        if (!ev.target.checked) {
+            extentionStorage.clearDomExpName();
+        }
+    });
+
+    exceptionTable.forEach((dom, domExpName) => {
+        dom.addEventListener('change', (ev) => {
+            if (ev.target.checked) { 
+                extentionStorage.setDomExpName(domExpName);
+            } else {
+                dom.checked = true;
+            }
+        });
+    });
+})();
 
 // Edit Availability
 (async () => {
@@ -38,7 +54,7 @@ document.getElementById('unknownError').addEventListener('click', () => {
         // initialize availability
         const status = new AvailabilityStatus();
         await status.loadDeviceConfig();
-        availabilityStatus = status.toPrimitiveObject(); // format to chrome storage
+        availabilityStatus = status.toPrimitiveObject(); // format for chrome storage
         await extentionStorage.setAvailability(availabilityStatus);
     }
     const enableEditCheckbox = document.getElementById("enableEditAvailability");

@@ -3,25 +3,33 @@ export const EXCEPTIONS = {
     InvalidStateError: new DOMException('The user attempted to register an authenticator that contains one of the credentials already registered with the relying party.', 'InvalidStateError'),
     NotSupportedError: new DOMException('The operation options is not supported by this device.', 'NotSupportedError'),
     AbortError: new DOMException('The operation is Aborted.', 'AbortError'),
+    TimeoutError: new DOMException('The operation timed out.', 'TimeoutError'),
     UnknownError: new DOMException('The operation is failed for an unknown transient reason.', 'UnknownError'),
 }
 
 export const extentionStorage = {
-    clearDomExp: async function() {
+    clearDomExpName: async function() {
         return new Promise((resolve) => {
             chrome.storage.local.remove('exceptionName', () => {
                 resolve();
             });
         });
     },
-    setDomExp: function(domExpName) {
+    setDomExpName: function(domExpName) {
         return new Promise((resolve) => {
             chrome.storage.local.set({ exceptionName: domExpName }, () => {
                 resolve();
-            })
+            });
         });
     },
-    onChangedDomExp: function(callback) {
+    getDomExpName: function() {
+        return new Promise((resolve) => {
+            chrome.storage.local.get('exceptionName', (result) => {
+                resolve(result.exceptionName);
+            });
+        });
+    },
+    onChangedDomExpName: function(callback) {
         chrome.storage.onChanged.addListener((changes) => {
             if (!changes.exceptionName) return;
             callback(changes.exceptionName.newValue)
