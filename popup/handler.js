@@ -21,12 +21,19 @@ import { AvailabilityStatus } from "../module/availabilityStatus.js";
     });
 
     // set onchanged
+    const enableErrorInjection = document.getElementById("enableErrorInjection");
+    enableErrorInjection.addEventListener("change", (ev) => {
+        if (!ev.target.checked) {
+            extentionStorage.clearDomExpName();
+        }
+    });
+
     exceptionTable.forEach((dom, domExpName) => {
         dom.addEventListener('change', (ev) => {
             if (ev.target.checked) { 
                 extentionStorage.setDomExpName(domExpName);
             } else {
-                extentionStorage.clearDomExpName();
+                dom.checked = true;
             }
         });
     });

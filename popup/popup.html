@@ -14,7 +14,18 @@
 
   <!-- Inject Error Tab Content -->
   <div class="tab-content active" id="inject-error">
-    <div class="button-container">
+    <div class="options-container">
+      <div class="toggle-container">
+        <label>
+          Enable Error Injection
+          <div class="toggle-switch">
+            <input type="checkbox" id="enableErrorInjection">
+            <span class="toggle-slider"></span>
+          </div>
+        </label>
+      </div>
+    </div>
+    <div class="button-container" id="error-container">
       <label><input type="checkbox" id="notAllowedError" /><span>NotAllowedError</span></label>
       <label><input type="checkbox" id="invalidStateError" /><span>InvalidStateError</span></label>
       <label><input type="checkbox" id="notSupportedError" /><span>NotSupportedError</span></label>

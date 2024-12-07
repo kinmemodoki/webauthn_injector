@@ -13,11 +13,27 @@ document.querySelectorAll('.tab-button').forEach(tabButton => {
 
 // Inject Error tab
 (()=> {
-  const checkboxes = document.querySelectorAll('#inject-error .button-container input[type="checkbox"]');
+  // initialize enable slider
+  const enableErrorInjection = document.getElementById('enableErrorInjection');
+  const errorContainer = document.getElementById('error-container');
+  extentionStorage.getDomExpName().then((currentDomExpName) => {
+    if (currentDomExpName) {
+      enableErrorInjection.checked = true;
+      errorContainer.style.display = 'flex';
+    } else {
+      errorContainer.style.display = 'none';
+    }
+  })
+  enableErrorInjection.addEventListener('change', () => {
+    errorContainer.style.display = enableErrorInjection.checked ? 'flex' : 'none';
+  });
 
+  // handling for only one checked
+  const checkboxes = document.querySelectorAll('#inject-error .button-container input[type="checkbox"]');
   checkboxes.forEach(checkbox => {
-    checkbox.addEventListener('change', () => {
-      if (!checkbox.checked) return;
+    checkbox.addEventListener('change', (ev) => {
+      // do nothind if checkbox is unchecked
+      if (!ev.target.checked) return;
       // unchecked others
       checkboxes.forEach(cb => {
         if (cb == checkbox) return;
@@ -27,8 +43,9 @@ document.querySelectorAll('.tab-button').forEach(tabButton => {
   });
 })();
 
-// Initialize availability tab
+// availability tab
 (async () => {
+  // initialize availability sliders
   const availabilityStatus = await extentionStorage.getAvailability();
   console.log(availabilityStatus)
 
